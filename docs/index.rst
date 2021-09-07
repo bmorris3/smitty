@@ -81,7 +81,7 @@ Want more decimal places reported?
     \end{tabular}
     \end{table}
 
-Want to add an extra column with comments:
+Want to add an extra column with comments defining each variable?
 
 .. code-block:: python
 
