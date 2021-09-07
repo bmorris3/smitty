@@ -6,6 +6,7 @@ __all__ = [
     'samples_to_latex'
 ]
 
+
 def default_decimal_places(lo, mi, hi):
     """
     Default guess for the number of decimal places to display
@@ -29,7 +30,10 @@ def format_upper_lower(low, mid, high, decimal_places=None, zero_pad='',
     else:
         signs = ['', '']
 
-    return wrap + f"{{{mid: ^{fmt_str}}}}_{{{signs[0]}{mid - low:^{fmt_str}}}}^{{{signs[1]}{high - mid:^{fmt_str}}}}" + wrap
+    return (
+        wrap + f"{{{mid: ^{fmt_str}}}}_{{{signs[0]}{mid - low:^{fmt_str}}}}"
+        f"^{{{signs[1]}{high - mid:^{fmt_str}}}}" + wrap
+    )
 
 
 def chain_to_one_sigma(samples, transformation=None):
