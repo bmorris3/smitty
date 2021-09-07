@@ -55,7 +55,7 @@ def display_one_sigma(samples):
 
 
 def samples_to_astropy_table(flatchain, labels=None, transformation=None,
-                             **kwargs):
+                             extra_column=None, **kwargs):
     """
     Turn a flat chain (from emcee for example) into an astropy table of formatted strings
     """
@@ -73,15 +73,34 @@ def samples_to_astropy_table(flatchain, labels=None, transformation=None,
     if labels is None:
         labels = [f'Parameter {n}' for n in range(flatchain.shape[1])]
 
-    for label, samples, tr in zip(labels, flatchain.T, trans):
-        rows.append(
-            [label,
-             format_upper_lower(*chain_to_one_sigma(
-                 samples, transformation=tr
-             ), **kwargs)]
-        )
+    if extra_column is not None:
+        if isinstance(extra_column, bool):
+            extras = ["" for _ in range(flatchain.shape[1])]
+        else:
+            extras = extra_column
 
-    return Table(rows=rows, names="Parameter, Measurement".split(', '))
+    for i, label, samples, tr in zip(
+            range(len(labels)), labels, flatchain.T, trans
+    ):
+        if extra_column is not None:
+            rows.append(
+                [label, extras[i],
+                 format_upper_lower(*chain_to_one_sigma(
+                     samples, transformation=tr
+                 ), **kwargs)]
+            )
+        else:
+            rows.append(
+                [label,
+                 format_upper_lower(*chain_to_one_sigma(
+                     samples, transformation=tr
+                 ), **kwargs)]
+            )
+
+    return Table(
+        rows=rows, names="Parameter, Comment, Measurement".split(', ')
+        if extra_column is not None else "Parameter, Measurement".split(', ')
+    )
 
 
 def samples_to_latex(flatchain, labels=None, transformation=None, **kwargs):

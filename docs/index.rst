@@ -81,6 +81,17 @@ Want more decimal places reported?
     \end{tabular}
     \end{table}
 
+Want to add an extra column with comments:
+
+    >>> print(
+    ...     samples_to_latex(
+    ...         flatchain,
+    ...         labels='a b c'.split(),
+    ...         extra_column='apples bananas cucumbers'.split()
+    ...     )
+    ... )
+
+
 
 .. toctree::
    :maxdepth: 2
