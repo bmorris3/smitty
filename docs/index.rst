@@ -83,6 +83,8 @@ Want more decimal places reported?
 
 Want to add an extra column with comments:
 
+.. code-block:: python
+
     >>> print(
     ...     samples_to_latex(
     ...         flatchain,
@@ -90,7 +92,14 @@ Want to add an extra column with comments:
     ...         extra_column='apples bananas cucumbers'.split()
     ...     )
     ... )
-
+    \begin{table}
+    \begin{tabular}{ccc}
+    Parameter & Comment & Measurement \\
+    a & apples & ${0.006}_{-0.096}^{+0.095}$ \\
+    b & bananas & ${3.12}_{-1.00}^{+0.99}$ \\
+    c & cucumbers & ${10.2}_{-3.8}^{+3.8}$ \\
+    \end{tabular}
+    \end{table}
 
 
 .. toctree::
