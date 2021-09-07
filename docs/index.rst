@@ -61,6 +61,26 @@ intervals. We can do this with:
     \end{tabular}
     \end{table}
 
+Want more decimal places reported?
+
+.. code-block:: python
+
+    >>> print(
+    ...     samples_to_latex(
+    ...         flatchain,
+    ...         labels='a b c'.split(),
+    ...         decimal_places=3
+    ...     )
+    ... )
+    \begin{table}
+    \begin{tabular}{cc}
+    Parameter & Measurement \\
+    a & ${0.006}_{-0.096}^{+0.095}$ \\
+    b & ${3.124}_{-0.997}^{+0.994}$ \\
+    c & ${10.169}_{-3.785}^{+3.803}$ \\
+    \end{tabular}
+    \end{table}
+
 
 .. toctree::
    :maxdepth: 2
