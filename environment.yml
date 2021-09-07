@@ -1,0 +1,7 @@
+name: smitty
+channels:
+  - conda-forge
+dependencies:
+  - astropy
+  - pip:
+    - pytest-astropy
